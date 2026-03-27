@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Campus Sarthi</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background: #f5f5f5; }
+
+    .login-header-enhanced {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem 0;
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; }
+    .campus-badge { font-size: 0.8rem; opacity: 0.85; color: white; margin-left: 0.5rem; }
+    .logo-section { display: flex; align-items: baseline; gap: 0.5rem; }
+    .main-nav ul { display: flex; list-style: none; gap: 1rem; margin: 0; padding: 0; }
+    .main-nav a { color: white; text-decoration: none; padding: 0.4rem 0.8rem; border-radius: 5px; transition: background 0.2s; }
+    .main-nav a:hover { background: rgba(255,255,255,0.2); }
+
+    .login-main-enhanced {
+      min-height: calc(100vh - 130px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .login-container-enhanced { width: 100%; max-width: 440px; }
+
+    .login-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    }
+    .login-header { text-align: center; margin-bottom: 2rem; }
+    .login-header h2 { color: #333; margin: 0 0 0.4rem 0; font-size: 1.6rem; }
+    .login-header p { color: #888; margin: 0; font-size: 0.95rem; }
+
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label { display: block; font-weight: 600; color: #555; margin-bottom: 0.4rem; font-size: 0.9rem; }
+    .input-container { position: relative; }
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .form-input:focus { outline: none; border-color: #667eea; }
+    .input-icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: #aaa; }
+
+    .role-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .role-tab {
+      flex: 1;
+      padding: 0.6rem;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      transition: all 0.2s;
+    }
+    .role-tab.active {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-color: transparent;
+    }
+    .role-tab i { display: block; font-size: 1.2rem; margin-bottom: 0.2rem; }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .login-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .error-message {
+      background: #fff0f0;
+      color: #e53e3e;
+      border: 1px solid #fed7d7;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+    .register-link { text-align: center; margin-top: 1.5rem; color: #888; font-size: 0.9rem; }
+    .register-link a { color: #667eea; font-weight: 600; text-decoration: none; }
+
+    footer { background: #333; color: white; text-align: center; padding: 1rem; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <header class="login-header-enhanced">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html" class="logo">Campus Sarthi</a>
+        <span class="campus-badge">Sign In</span>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="register.html"><i class="fas fa-user-plus"></i> Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="login-main-enhanced">
+    <div class="login-container-enhanced">
+      <div class="login-card">
+        <div class="login-header">
+          <h2><i class="fas fa-sign-in-alt"></i> Welcome Back</h2>
+          <p>Sign in to your Campus Sarthi account</p>
+        </div>
+
+        <!-- Role selector -->
+        <div class="role-tabs">
+          <button class="role-tab active" onclick="setRole('student')">
+            <i class="fas fa-user-graduate"></i> Student
+          </button>
+          <button class="role-tab" onclick="setRole('faculty')">
+            <i class="fas fa-chalkboard-teacher"></i> Faculty
+          </button>
+          <button class="role-tab" onclick="setRole('recruiter')">
+            <i class="fas fa-briefcase"></i> Recruiter
+          </button>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label"><i class="fas fa-envelope"></i> Email Address</label>
+            <div class="input-container">
+              <i class="fas fa-envelope input-icon"></i>
+              <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"><i class="fas fa-lock"></i> Password</label>
+            <div class="input-container">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+            </div>
+          </div>
+
+          <button type="submit" class="login-btn" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+          </button>
+        </form>
+
+        <div class="register-link">
+          Don't have an account? <a href="register.html">Create one here</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Campus Sarthi. All rights reserved.</p>
+  </footer>
+
+  <script src="assets/js/api.js"></script>
+  <script>
+    let selectedRole = 'student';
+
+    function setRole(role) {
+      selectedRole = role;
+      document.querySelectorAll('.role-tab').forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('loginBtn');
+
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+      btn.disabled = true;
+
+      try {
+        const data = await login(email, password);
+
+        // Redirect based on role
+        const role = data.user.role;
+        if (role === 'student') {
+          window.location.href = 'student.html';
+        } else if (role === 'faculty') {
+          window.location.href = 'faculty.html';
+        } else if (role === 'recruiter') {
+          window.location.href = 'dashboard.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      } catch (error) {
+        showError(error.message || 'Login failed. Please check your credentials.');
+      } finally {
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        btn.disabled = false;
+      }
+    });
+
+    function showError(msg) {
+      const el = document.getElementById('errorMessage');
+      el.textContent = msg;
+      el.style.display = 'block';
+      setTimeout(() => el.style.display = 'none', 5000);
+    }
+
+    // If already logged in, redirect
+    if (typeof isAuthenticated === 'function' && isAuthenticated()) {
+      const user = getCurrentUser();
+      if (user?.role === 'student') window.location.href = 'student.html';
+      else if (user?.role === 'faculty') window.location.href = 'faculty.html';
+      else window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>
